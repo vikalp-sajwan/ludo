@@ -7,6 +7,7 @@ import Piece from './Piece';
 const Wrapper = styled.div`
   height: 100px;
   width: 100px;
+  padding-top: 20px;
 `;
 
 storiesOf('Piece', module)
@@ -28,5 +29,10 @@ storiesOf('Piece', module)
   .add('yellow', () => (
     <Wrapper>
       <Piece color="yellow" />
+    </Wrapper>
+  ))
+  .add('with piece count', () => (
+    <Wrapper>
+      <Piece color="green" times="3" />
     </Wrapper>
   ));
