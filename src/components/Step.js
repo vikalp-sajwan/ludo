@@ -47,16 +47,18 @@ const getPieceCount = pieces => {
 
 const generatePieces = pieces => {
   let pieceItems = [];
-  pieces.map(piece => {
+  pieces.forEach((piece, index) => {
     for (let count = 0; count < piece.times; count++) {
-      pieceItems.push(<Piece color={piece.color} />);
+      pieceItems.push(<Piece color={piece.color} key={index + '' + count} />);
     }
   });
   return pieceItems;
 };
 
 const generateGroupedPieces = pieces => {
-  return pieces.map(piece => <Piece color={piece.color} times={piece.times} />);
+  return pieces.map(piece => (
+    <Piece key={piece.color} color={piece.color} times={piece.times} />
+  ));
 };
 
 const Step = props => {

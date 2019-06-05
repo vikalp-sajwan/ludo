@@ -4,10 +4,10 @@ import { storiesOf } from '@storybook/react';
 import Step from './Step';
 
 const pieces = [
-  { color: 'red', times: '1' },
-  { color: 'blue', times: '2' },
-  { color: 'green', times: '3' },
-  { color: 'yellow', times: '4' }
+  { color: 'red', times: 1 },
+  { color: 'blue', times: 2 },
+  { color: 'green', times: 3 },
+  { color: 'yellow', times: 4 }
 ];
 
 storiesOf('Step', module)

@@ -32,7 +32,7 @@ storiesOf('Piece', module)
     </Wrapper>
   ))
   .add('with piece count', () => (
-    <Wrapper>
+    <Wrapper style={{ width: 50, height: 50 }}>
       <Piece color="green" times="3" />
     </Wrapper>
   ));
