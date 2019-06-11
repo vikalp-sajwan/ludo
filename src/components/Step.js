@@ -5,7 +5,7 @@ import Piece from './Piece';
 import { theme } from '../theme';
 import starImg from '../images/star.svg';
 
-const StepTile = styled.div`
+export const StepTile = styled.div`
   width: 100px;
   height: 100px;
   display: grid;
