@@ -9,8 +9,14 @@ const Wrapper = styled.div`
   width: 300px;
 `;
 
-storiesOf('PlayerHome', module).add('with pieces', () => (
-  <Wrapper>
-    <PlayerHome color="yellow" numOfPieces="3" />
-  </Wrapper>
-));
+storiesOf('PlayerHome', module)
+  .add('empty', () => (
+    <Wrapper>
+      <PlayerHome color="yellow" />
+    </Wrapper>
+  ))
+  .add('with pieces', () => (
+    <Wrapper>
+      <PlayerHome color="yellow" numOfPieces="3" />
+    </Wrapper>
+  ));
