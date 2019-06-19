@@ -69,7 +69,7 @@ const generatePath = (position, color, pieces) => {
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-gap: 5px;
+  grid-gap: 3px;
   ${({ position }) =>
     (position === 'top' || position === 'bottom') &&
     `
