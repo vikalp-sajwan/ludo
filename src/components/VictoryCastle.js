@@ -78,19 +78,19 @@ const VictoryCastle = ({ pieceData }) => {
         <path fill="#fff" d="M-1-1h514v514H-1z" />
         <g>
           <path
-            fill={theme.secondary[pieceData[0]['color']]}
+            fill={theme.base[pieceData[0]['color']]}
             d="M0 512l256-256L512 512H1z"
           />
           <path
-            fill={theme.secondary[pieceData[1]['color']]}
+            fill={theme.base[pieceData[1]['color']]}
             d="M0-512L256 256-0 512l0-512z"
           />
           <path
-            fill={theme.secondary[pieceData[2]['color']]}
+            fill={theme.base[pieceData[2]['color']]}
             d="M512 0L256 256 0 0h512z"
           />
           <path
-            fill={theme.secondary[pieceData[3]['color']]}
+            fill={theme.base[pieceData[3]['color']]}
             d="M512 512L256 256 512 0v512z"
           />
         </g>

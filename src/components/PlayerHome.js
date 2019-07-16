@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   border-radius: 5px;
   align-items: center;
   grid-template-columns: 1fr 1fr;
-  background: ${({ color }) => theme.secondary[color]};
+  background: ${({ color }) => theme.base[color]};
 `;
 
 const PlayerHomeTile = styled(StepTile)`

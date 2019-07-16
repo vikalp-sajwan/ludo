@@ -6,8 +6,8 @@ import { theme } from '../theme';
 import starImg from '../images/star.svg';
 
 export const StepTile = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   display: grid;
   align-items: center;
   justify-items: center;
@@ -24,8 +24,8 @@ export const StepTile = styled.div`
 `;
 
 const MultiPieceStepTile = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;

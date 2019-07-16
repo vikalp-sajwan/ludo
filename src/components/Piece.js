@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { theme } from '../theme';
 
 const Wrapper = styled.div`
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   position: relative;
-  bottom: 25%;
+  bottom: 30%;
 
   ${props =>
     props.times > 1 &&
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     :after {
     position: absolute;
     content: "${props.times}";
-    font-size: 1.5em;
+    font-size: 0.8em;
     font-weight: 900;
     color: #fff;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
