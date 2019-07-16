@@ -8,32 +8,20 @@ const Wrapper = styled.div`
   height: 100%;
   position: relative;
   bottom: 30%;
-
-  ${props =>
-    props.times > 1 &&
-    `
-    :after {
-    position: absolute;
-    content: "${props.times}";
-    font-size: 0.8em;
-    font-weight: 900;
-    color: #fff;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    font-family: sans-serif;
-    top: 15%;
-    right: 35%;
-  `}
 `;
 
 const Piece = ({ color, times = 1 }) => {
   return (
-    <Wrapper times={times}>
+    <Wrapper>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="100%"
         viewBox="-54 0 512 512"
         width="100%"
       >
+        <style>
+          .piece-text &#123; font-size: 400px; font-weight: 800; &#125;
+        </style>
         <path
           d="M10 202.371C10 96.13 96.074 10 202.254 10c106.176 0 192.254 86.129 192.254 192.371C394.504 349.863 202.254 502 202.254 502S10 349.863 10 202.371zm0 0"
           fill={theme.primary[color]}
@@ -47,6 +35,11 @@ const Piece = ({ color, times = 1 }) => {
             d="M295.195 200.012c0-51.36-41.613-93-92.941-93-51.332 0-92.941 41.64-92.941 93 0 51.363 41.609 93 92.94 93 51.329 0 92.942-41.637 92.942-93zm0 0"
             fill="#aae2c9"
           />
+        )}
+        {times > 1 && (
+          <text x="100" y="350" class="piece-text">
+            {times}
+          </text>
         )}
       </svg>
     </Wrapper>
