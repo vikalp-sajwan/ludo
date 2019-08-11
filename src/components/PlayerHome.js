@@ -24,7 +24,7 @@ const PlayerHomeTile = styled(StepTile)`
   border: 3px solid #c2c2c2;
 `;
 
-const PlayerHome = ({ color, numOfPieces = 0 }) => {
+const PlayerHome = ({ color, pieceCount = 0 }) => {
   const tiles = [
     <PlayerHomeTile />,
     <PlayerHomeTile />,
@@ -36,7 +36,7 @@ const PlayerHome = ({ color, numOfPieces = 0 }) => {
       <Piece color={color} />
     </PlayerHomeTile>,
     0,
-    numOfPieces
+    pieceCount
   );
 
   return <Wrapper color={color}>{tiles}</Wrapper>;
