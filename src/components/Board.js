@@ -57,42 +57,82 @@ const VictoryCastleWrapper = styled.div`
   grid-row: 7 / span 3;
 `;
 
-const Board = () => {
+const Board = ({ gameState = [] }) => {
   return (
     <BoardWrapper>
       <Path1Wrapper>
-        <Pathway color="red" position="bottom" />
+        <Pathway
+          position="bottom"
+          color={gameState[0].color}
+          pieces={gameState[0].pathData}
+        />
       </Path1Wrapper>
       <Path2Wrapper>
-        <Pathway color="blue" position="left" />
+        <Pathway
+          position="left"
+          color={gameState[1].color}
+          pieces={gameState[1].pathData}
+        />
       </Path2Wrapper>
       <Path3Wrapper>
-        <Pathway color="green" position="top" />
+        <Pathway
+          position="top"
+          color={gameState[2].color}
+          pieces={gameState[2].pathData}
+        />
       </Path3Wrapper>
       <Path4Wrapper>
-        <Pathway color="yellow" position="right" />
+        <Pathway
+          position="right"
+          color={gameState[3].color}
+          pieces={gameState[3].pathData}
+        />
       </Path4Wrapper>
 
       <Home1Wrapper>
-        <PlayerHome color="red" />
+        <PlayerHome
+          color={gameState[0].color}
+          pieceCount={gameState[0].homePieceCount}
+        />
       </Home1Wrapper>
       <Home2Wrapper>
-        <PlayerHome color="blue" />
+        <PlayerHome
+          color={gameState[1].color}
+          pieceCount={gameState[1].homePieceCount}
+        />
       </Home2Wrapper>
       <Home3Wrapper>
-        <PlayerHome color="green" />
+        <PlayerHome
+          color={gameState[2].color}
+          pieceCount={gameState[2].homePieceCount}
+        />
       </Home3Wrapper>
       <Home4Wrapper>
-        <PlayerHome color="yellow" />
+        <PlayerHome
+          color={gameState[3].color}
+          pieceCount={gameState[3].homePieceCount}
+        />
       </Home4Wrapper>
 
       <VictoryCastleWrapper>
         <VictoryCastle
           pieceData={[
-            { color: 'red' },
-            { color: 'blue' },
-            { color: 'green' },
-            { color: 'yellow' }
+            {
+              color: gameState[0].color,
+              pieceCount: gameState[0].victoryPieceCount
+            },
+            {
+              color: gameState[1].color,
+              pieceCount: gameState[1].victoryPieceCount
+            },
+            {
+              color: gameState[2].color,
+              pieceCount: gameState[2].victoryPieceCount
+            },
+            {
+              color: gameState[3].color,
+              pieceCount: gameState[3].victoryPieceCount
+            }
           ]}
         />
       </VictoryCastleWrapper>

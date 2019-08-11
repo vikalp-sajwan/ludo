@@ -17,6 +17,6 @@ storiesOf('PlayerHome', module)
   ))
   .add('with pieces', () => (
     <Wrapper>
-      <PlayerHome color="yellow" numOfPieces="3" />
+      <PlayerHome color="yellow" pieceCount="3" />
     </Wrapper>
   ));
