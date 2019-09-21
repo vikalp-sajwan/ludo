@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Board from './Board';
+import Game from './Game';
 
 const boardData = [
   {
@@ -37,6 +37,4 @@ const boardData = [
   }
 ];
 
-storiesOf('Board', module).add('with pieces', () => (
-  <Board boardData={boardData} />
-));
+storiesOf('Game', module).add('basic', () => <Game gameState={boardData} />);

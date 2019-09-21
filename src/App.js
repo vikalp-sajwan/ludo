@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Board from './components/Board';
+import Game from './components/Game';
 
 const mapStateToProps = state => {
   return { state: state };
 };
 
 const App = ({ state }) => {
-  return <Board gameState={state} />;
+  return <Game gameState={state} />;
 };
 
 export default connect(mapStateToProps)(App);
