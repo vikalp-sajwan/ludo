@@ -57,60 +57,60 @@ const VictoryCastleWrapper = styled.div`
   grid-row: 7 / span 3;
 `;
 
-const Board = ({ gameState = [] }) => {
+const Board = ({ boardData = [] }) => {
   return (
     <BoardWrapper>
       <Path1Wrapper>
         <Pathway
           position="bottom"
-          color={gameState[0].color}
-          pieces={gameState[0].pathData}
+          color={boardData[0].color}
+          pieces={boardData[0].pathData}
         />
       </Path1Wrapper>
       <Path2Wrapper>
         <Pathway
           position="left"
-          color={gameState[1].color}
-          pieces={gameState[1].pathData}
+          color={boardData[1].color}
+          pieces={boardData[1].pathData}
         />
       </Path2Wrapper>
       <Path3Wrapper>
         <Pathway
           position="top"
-          color={gameState[2].color}
-          pieces={gameState[2].pathData}
+          color={boardData[2].color}
+          pieces={boardData[2].pathData}
         />
       </Path3Wrapper>
       <Path4Wrapper>
         <Pathway
           position="right"
-          color={gameState[3].color}
-          pieces={gameState[3].pathData}
+          color={boardData[3].color}
+          pieces={boardData[3].pathData}
         />
       </Path4Wrapper>
 
       <Home1Wrapper>
         <PlayerHome
-          color={gameState[0].color}
-          pieceCount={gameState[0].homePieceCount}
+          color={boardData[0].color}
+          pieceCount={boardData[0].homePieceCount}
         />
       </Home1Wrapper>
       <Home2Wrapper>
         <PlayerHome
-          color={gameState[1].color}
-          pieceCount={gameState[1].homePieceCount}
+          color={boardData[1].color}
+          pieceCount={boardData[1].homePieceCount}
         />
       </Home2Wrapper>
       <Home3Wrapper>
         <PlayerHome
-          color={gameState[2].color}
-          pieceCount={gameState[2].homePieceCount}
+          color={boardData[2].color}
+          pieceCount={boardData[2].homePieceCount}
         />
       </Home3Wrapper>
       <Home4Wrapper>
         <PlayerHome
-          color={gameState[3].color}
-          pieceCount={gameState[3].homePieceCount}
+          color={boardData[3].color}
+          pieceCount={boardData[3].homePieceCount}
         />
       </Home4Wrapper>
 
@@ -118,20 +118,20 @@ const Board = ({ gameState = [] }) => {
         <VictoryCastle
           pieceData={[
             {
-              color: gameState[0].color,
-              pieceCount: gameState[0].victoryPieceCount
+              color: boardData[0].color,
+              pieceCount: boardData[0].victoryPieceCount
             },
             {
-              color: gameState[1].color,
-              pieceCount: gameState[1].victoryPieceCount
+              color: boardData[1].color,
+              pieceCount: boardData[1].victoryPieceCount
             },
             {
-              color: gameState[2].color,
-              pieceCount: gameState[2].victoryPieceCount
+              color: boardData[2].color,
+              pieceCount: boardData[2].victoryPieceCount
             },
             {
-              color: gameState[3].color,
-              pieceCount: gameState[3].victoryPieceCount
+              color: boardData[3].color,
+              pieceCount: boardData[3].victoryPieceCount
             }
           ]}
         />
