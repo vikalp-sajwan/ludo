@@ -15,12 +15,10 @@ export const StepTile = styled.div`
   border-radius: 3px;
   box-sizing: border-box;
   background-color: ${props => theme.base[props.color]};
-
-  ${({ showStar }) =>
-    showStar &&
-    `
-    background: url(${starImg}) no-repeat;
-  `}
+  ${({ highlight }) =>
+    highlight &&
+    `box-shadow: 0px 0px 5px 5px #0ff; z-index: 5; cursor: pointer;`}
+  ${({ showStar }) => showStar && `background: url(${starImg}) no-repeat;`}
 `;
 
 const MultiPieceStepTile = styled.div`
@@ -33,12 +31,10 @@ const MultiPieceStepTile = styled.div`
   border-radius: 3px;
   box-sizing: border-box;
   background-color: ${props => theme.base[props.color]};
-
-  ${({ showStar }) =>
-    showStar &&
-    `
-    background: url(${starImg}) no-repeat;
-  `}
+  ${({ highlight }) =>
+    highlight &&
+    `box-shadow: 0px 0px 5px 5px #0ff; z-index: 5; cursor:pointer;`}
+  ${({ showStar }) => showStar && `background: url(${starImg}) no-repeat;`}
 `;
 
 const getPieceCount = pieces => {
@@ -62,27 +58,40 @@ const generateGroupedPieces = pieces => {
 };
 
 const Step = props => {
-  const { color = 'white', showStar = false, pieces = [] } = props;
+  const {
+    color = 'white',
+    showStar = false,
+    pieces = [],
+    isClickable = false
+  } = props;
   const pieceCount = getPieceCount(pieces);
 
   if (pieceCount < 2) {
     const pieceItems = generatePieces(pieces);
     return (
-      <StepTile color={color} showStar={showStar}>
+      <StepTile color={color} showStar={showStar} highlight={isClickable}>
         {pieceItems}
       </StepTile>
     );
   } else if (pieceCount < 5) {
     const pieceItems = generatePieces(pieces);
     return (
-      <MultiPieceStepTile color={color} showStar={showStar}>
+      <MultiPieceStepTile
+        color={color}
+        showStar={showStar}
+        highlight={isClickable}
+      >
         {pieceItems}
       </MultiPieceStepTile>
     );
   } else {
     const pieceItems = generateGroupedPieces(pieces);
     return (
-      <MultiPieceStepTile color={color} showStar={showStar}>
+      <MultiPieceStepTile
+        color={color}
+        showStar={showStar}
+        highlight={isClickable}
+      >
         {pieceItems}
       </MultiPieceStepTile>
     );

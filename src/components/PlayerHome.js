@@ -16,6 +16,9 @@ const Wrapper = styled.div`
   align-items: center;
   grid-template-columns: 1fr 1fr;
   background: ${({ color }) => theme.base[color]};
+  ${({ highlight }) =>
+    highlight &&
+    `box-shadow: 0px 0px 5px 5px #0ff; z-index: 5; cursor: pointer;`}
 `;
 
 const PlayerHomeTile = styled(StepTile)`
@@ -24,7 +27,7 @@ const PlayerHomeTile = styled(StepTile)`
   border: 3px solid #c2c2c2;
 `;
 
-const PlayerHome = ({ color, pieceCount = 0 }) => {
+const PlayerHome = ({ color, pieceCount = 0, isclickable = false }) => {
   const tiles = [
     <PlayerHomeTile />,
     <PlayerHomeTile />,
@@ -39,7 +42,11 @@ const PlayerHome = ({ color, pieceCount = 0 }) => {
     pieceCount
   );
 
-  return <Wrapper color={color}>{tiles}</Wrapper>;
+  return (
+    <Wrapper color={color} highlight={isclickable}>
+      {tiles}
+    </Wrapper>
+  );
 };
 
 export default PlayerHome;
