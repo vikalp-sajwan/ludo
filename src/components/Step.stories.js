@@ -26,4 +26,7 @@ storiesOf('Step', module)
   ))
   .add('star step with multiple pieces', () => (
     <Step showStar={true} pieces={pieces.slice(0, 2)} />
+  ))
+  .add('highlighted and clickable', () => (
+    <Step pieces={[pieces[0]]} isClickable={true} />
   ));

@@ -19,4 +19,9 @@ storiesOf('PlayerHome', module)
     <Wrapper>
       <PlayerHome color="yellow" pieceCount="3" />
     </Wrapper>
+  ))
+  .add('highlighted and clickable', () => (
+    <Wrapper>
+      <PlayerHome color="yellow" pieceCount="3" isclickable={true} />
+    </Wrapper>
   ));

@@ -12,22 +12,27 @@ const Button = styled.button`
   font-size: 18px;
 `;
 
-const DiceSection = ({ enableDice, handleDiceThrow }) => {
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const DiceSection = ({ enableDice }) => {
   const [displayMessage, setDisplayMessage] = useState('Throw Dice!!!');
 
   const diceThrowHandler = () => {
     const diceValue = Math.floor(Math.random() * 6) + 1;
     setDisplayMessage(`It's a ${diceValue}`);
-    handleDiceThrow(diceValue);
   };
 
   return (
-    <div>
+    <Wrapper>
       <Message>{displayMessage}</Message>
       <Button disabled={!enableDice} onClick={diceThrowHandler}>
         Throw
       </Button>
-    </div>
+    </Wrapper>
   );
 };
 

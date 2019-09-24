@@ -6,9 +6,8 @@ import DiceSection from './DiceSection';
 
 const Wrapper = styled.div`
   display: grid;
-  width: 100vw;
   height: 100vh;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: auto minmax(250px, auto);
   justify-items: center;
   align-items: center;
   justify-content: center;
@@ -18,8 +17,8 @@ const Wrapper = styled.div`
 const Game = ({ gameState }) => {
   return (
     <Wrapper>
-      <Board boardData={gameState} />
-      <DiceSection enableDice={true} handleDiceThrow={a => console.log(a)} />
+      <Board boardData={gameState.boardData} />
+      <DiceSection {...gameState.diceSectionData} />
     </Wrapper>
   );
 };

@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   height: 100%;
   position: relative;
   bottom: 30%;
+  z-index: 10;
 `;
 
 const Piece = ({ color, times = 1 }) => {
