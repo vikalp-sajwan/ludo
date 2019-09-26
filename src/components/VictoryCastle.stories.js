@@ -18,5 +18,5 @@ const pieceData = [
 ];
 
 storiesOf('VictoryCastle', module)
-  .add('empty', () => <VictoryCastle pieceData={emptyPieceData} />)
+  .add('default', () => <VictoryCastle pieceData={emptyPieceData} />)
   .add('withPieces', () => <VictoryCastle pieceData={pieceData} />);

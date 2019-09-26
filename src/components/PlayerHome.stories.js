@@ -22,6 +22,6 @@ storiesOf('PlayerHome', module)
   ))
   .add('highlighted and clickable', () => (
     <Wrapper>
-      <PlayerHome color="yellow" pieceCount="3" isclickable={true} />
+      <PlayerHome color="red" pieceCount="3" isPlayingTurn={true} />
     </Wrapper>
   ));

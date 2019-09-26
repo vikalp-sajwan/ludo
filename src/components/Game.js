@@ -18,7 +18,7 @@ const Game = ({ gameState }) => {
   return (
     <Wrapper>
       <Board boardData={gameState.boardData} />
-      <DiceSection {...gameState.diceSectionData} />
+      <DiceSection />
     </Wrapper>
   );
 };

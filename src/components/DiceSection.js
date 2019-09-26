@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+
 import styled from 'styled-components';
 
 const Message = styled.p`
@@ -18,22 +20,34 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const DiceSection = ({ enableDice }) => {
-  const [displayMessage, setDisplayMessage] = useState('Throw Dice!!!');
-
-  const diceThrowHandler = () => {
-    const diceValue = Math.floor(Math.random() * 6) + 1;
-    setDisplayMessage(`It's a ${diceValue}`);
+const mapStateToProps = ({ winner, isPlayingTurn, diceValue }) => {
+  return {
+    enableDice: !winner && !isPlayingTurn,
+    diceValue: diceValue
   };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleDiceThrow: () =>
+      dispatch({ type: 'DICE_ROLL', value: Math.floor(Math.random() * 6) + 1 })
+  };
+};
+
+const DiceSection = ({ enableDice, diceValue, handleDiceThrow }) => {
+  const displayMessage = !diceValue ? 'Throw Dice!!!' : `It's a ${diceValue}`;
 
   return (
     <Wrapper>
       <Message>{displayMessage}</Message>
-      <Button disabled={!enableDice} onClick={diceThrowHandler}>
+      <Button disabled={!enableDice} onClick={handleDiceThrow}>
         Throw
       </Button>
     </Wrapper>
   );
 };
 
-export default DiceSection;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DiceSection);

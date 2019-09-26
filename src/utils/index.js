@@ -8,15 +8,11 @@ const GLOBAL_TRACK_OFFSET = {
 
 export const getPresentationalData = gameState => {
   const presentationalData = {
-    boardData: [],
-    diceSectionData: {}
+    boardData: []
   };
   let boardData = getNonGlobalPathData(gameState);
   boardData = getGlobalPathData(boardData, gameState);
   presentationalData.boardData = boardData;
-  presentationalData.diceSectionData = {
-    enableDice: true
-  };
 
   return presentationalData;
 };
@@ -30,9 +26,9 @@ const getNonGlobalPathData = gameState => {
     let victoryPieceCount = 0;
     let pathData = {};
     gameState.pieces[playerColor].forEach(piecePosition => {
-      if (piecePosition == 0) {
+      if (piecePosition === 0) {
         homePieceCount++;
-      } else if (piecePosition == 57) {
+      } else if (piecePosition === 57) {
         victoryPieceCount++;
       } else if (piecePosition > 51) {
         let pieceVictoryStepPosition = piecePosition - 38;
@@ -95,16 +91,16 @@ const getPiecePathColor = pieceGlobalPosition => {
 };
 
 const getPiecePathPosition = (piecePathColor, pieceGlobalPosition) => {
-  if (piecePathColor == 'red') {
+  if (piecePathColor === 'red') {
     if (pieceGlobalPosition >= 1 && pieceGlobalPosition <= 5) {
       return pieceGlobalPosition + 8;
     }
     return pieceGlobalPosition - 5;
-  } else if (piecePathColor == 'blue') {
+  } else if (piecePathColor === 'blue') {
     return pieceGlobalPosition - 5;
-  } else if (piecePathColor == 'green') {
+  } else if (piecePathColor === 'green') {
     return pieceGlobalPosition - 18;
-  } else if (piecePathColor == 'yellow') {
+  } else if (piecePathColor === 'yellow') {
     return pieceGlobalPosition - 31;
   }
 };
@@ -112,11 +108,11 @@ const getPiecePathPosition = (piecePathColor, pieceGlobalPosition) => {
 const addPieceToPathData = (pathData, targetPosition, pieceColor) => {
   let isPieceAdded = false;
   for (let position in pathData) {
-    if (position != targetPosition) {
+    if (position !== targetPosition) {
       continue;
     }
     let newPathPositionData = pathData[position].map(({ color, times }) => {
-      if (color == pieceColor) {
+      if (color === pieceColor) {
         isPieceAdded = true;
         return { color: color, times: times + 1 };
       } else {

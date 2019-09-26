@@ -11,7 +11,7 @@ const pieces = [
 ];
 
 storiesOf('Step', module)
-  .add('normal', () => <Step />)
+  .add('default', () => <Step />)
   .add('colored', () => <Step color="red" />)
   .add('with single piece', () => <Step pieces={[pieces[0]]} />)
   .add('upto 4 pieces', () => <Step pieces={pieces.slice(0, 2)} />)
