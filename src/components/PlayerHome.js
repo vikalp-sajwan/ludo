@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import { StepTile } from './Step';
 import Piece from './Piece';
@@ -27,26 +28,39 @@ const PlayerHomeTile = styled(StepTile)`
   border: 3px solid #c2c2c2;
 `;
 
-const PlayerHome = ({ color, pieceCount = 0, isclickable = false }) => {
-  const tiles = [
-    <PlayerHomeTile />,
-    <PlayerHomeTile />,
-    <PlayerHomeTile />,
-    <PlayerHomeTile />
+const mapStateToProps = (
+  { isPlayingTurn, currentPlayer },
+  { color, pieceCount }
+) => {
+  return {
+    isPlayingTurn:
+      currentPlayer === color &&
+      (!isPlayingTurn || (isPlayingTurn && pieceCount > 0))
+  };
+};
+
+const PlayerHome = ({ color, pieceCount = 0, isPlayingTurn = false }) => {
+  let tiles = [
+    <PlayerHomeTile key={0} />,
+    <PlayerHomeTile key={1} />,
+    <PlayerHomeTile key={2} />,
+    <PlayerHomeTile key={3} />
   ];
-  tiles.fill(
-    <PlayerHomeTile>
-      <Piece color={color} />
-    </PlayerHomeTile>,
-    0,
-    pieceCount
-  );
+  tiles = tiles.map((tile, index) => {
+    return index <= pieceCount - 1 ? (
+      <PlayerHomeTile key={index}>
+        <Piece color={color} />
+      </PlayerHomeTile>
+    ) : (
+      tile
+    );
+  });
 
   return (
-    <Wrapper color={color} highlight={isclickable}>
+    <Wrapper color={color} highlight={isPlayingTurn}>
       {tiles}
     </Wrapper>
   );
 };
 
-export default PlayerHome;
+export default connect(mapStateToProps)(PlayerHome);

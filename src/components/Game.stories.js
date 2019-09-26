@@ -37,10 +37,6 @@ const boardData = [
   }
 ];
 
-const diceSectionData = {
-  enableDice: true
-};
-
-storiesOf('Game', module).add('basic', () => (
-  <Game gameState={{ boardData, diceSectionData }} />
+storiesOf('Game', module).add('default', () => (
+  <Game gameState={{ boardData }} />
 ));
