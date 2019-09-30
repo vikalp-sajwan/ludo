@@ -33,13 +33,13 @@ const mapStateToProps = (
   { color, pieceCount }
 ) => {
   return {
-    isPlayingTurn:
+    highlight:
       currentPlayer === color &&
       (!isPlayingTurn || (isPlayingTurn && pieceCount > 0))
   };
 };
 
-const PlayerHome = ({ color, pieceCount = 0, isPlayingTurn = false }) => {
+const PlayerHome = ({ color, pieceCount = 0, highlight = false, dispatch }) => {
   let tiles = [
     <PlayerHomeTile key={0} />,
     <PlayerHomeTile key={1} />,
@@ -57,7 +57,17 @@ const PlayerHome = ({ color, pieceCount = 0, isPlayingTurn = false }) => {
   });
 
   return (
-    <Wrapper color={color} highlight={isPlayingTurn}>
+    <Wrapper
+      color={color}
+      highlight={highlight}
+      onClick={() =>
+        dispatch({
+          type: 'MOVE_PIECE',
+          color: color,
+          currentStepValue: 0
+        })
+      }
+    >
       {tiles}
     </Wrapper>
   );
