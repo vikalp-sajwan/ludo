@@ -30,7 +30,10 @@ const mapStateToProps = ({ winner, isPlayingTurn, diceValue }) => {
 const mapDispatchToProps = dispatch => {
   return {
     handleDiceThrow: () =>
-      dispatch({ type: 'DICE_ROLL', value: Math.floor(Math.random() * 6) + 1 })
+      dispatch({
+        type: 'DICE_ROLL',
+        diceValue: Math.floor(Math.random() * 6) + 1
+      })
   };
 };
 
