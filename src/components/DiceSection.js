@@ -23,7 +23,8 @@ const Wrapper = styled.div`
 const mapStateToProps = ({ winner, isPlayingTurn, diceValue }) => {
   return {
     enableDice: !winner && !isPlayingTurn,
-    diceValue: diceValue
+    diceValue: diceValue,
+    winner: winner
   };
 };
 
@@ -33,18 +34,48 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: 'DICE_ROLL',
         diceValue: Math.floor(Math.random() * 6) + 1
+      }),
+    handleFakeDiceThrow: val =>
+      dispatch({
+        type: 'DICE_ROLL',
+        diceValue: val
       })
   };
 };
 
-const DiceSection = ({ enableDice, diceValue, handleDiceThrow }) => {
-  const displayMessage = !diceValue ? 'Throw Dice!!!' : `It's a ${diceValue}`;
+const DiceSection = ({
+  enableDice,
+  diceValue,
+  winner,
+  handleDiceThrow,
+  handleFakeDiceThrow
+}) => {
+  let displayMessage = !diceValue ? 'Throw Dice!!!' : `It's a ${diceValue}`;
+  displayMessage = winner ? winner.toUpperCase() + ' WON !!!' : displayMessage;
 
   return (
     <Wrapper>
       <Message>{displayMessage}</Message>
       <Button disabled={!enableDice} onClick={handleDiceThrow}>
         Throw
+      </Button>
+      <Button disabled={!enableDice} onClick={() => handleFakeDiceThrow(1)}>
+        ---1---
+      </Button>
+      <Button disabled={!enableDice} onClick={() => handleFakeDiceThrow(2)}>
+        ---2---
+      </Button>
+      <Button disabled={!enableDice} onClick={() => handleFakeDiceThrow(3)}>
+        ---3---
+      </Button>
+      <Button disabled={!enableDice} onClick={() => handleFakeDiceThrow(4)}>
+        ---4---
+      </Button>
+      <Button disabled={!enableDice} onClick={() => handleFakeDiceThrow(5)}>
+        ---5---
+      </Button>
+      <Button disabled={!enableDice} onClick={() => handleFakeDiceThrow(6)}>
+        ---6---
       </Button>
     </Wrapper>
   );

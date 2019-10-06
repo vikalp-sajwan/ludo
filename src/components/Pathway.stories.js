@@ -5,12 +5,15 @@ import Pathway from './Pathway';
 
 const pieces = {
   9: [
-    { color: 'red', times: 1 },
-    { color: 'blue', times: 2 },
-    { color: 'yellow', times: 1 }
+    { color: 'red', times: 1, piecePosition: 43 },
+    { color: 'blue', times: 2, piecePosition: 32 },
+    { color: 'yellow', times: 1, piecePosition: 13 }
   ],
-  4: [{ color: 'blue', times: 1 }, { color: 'yellow', times: 1 }],
-  12: [{ color: 'green', times: 1 }]
+  4: [
+    { color: 'blue', times: 1, piecePosition: 12 },
+    { color: 'yellow', times: 1, piecePosition: 22 }
+  ],
+  12: [{ color: 'green', times: 1, piecePosition: 51 }]
 };
 
 storiesOf('Pathway', module)

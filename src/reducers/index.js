@@ -1,3 +1,5 @@
+import { getGlobalPosition, isNonViolenceGlobalPosition } from '../utils';
+
 const initialState = {
   players: ['red', 'blue', 'green', 'yellow'],
   winner: '',
@@ -29,7 +31,8 @@ export const rootReducer = (state = initialState, action) => {
       };
 
     case 'MOVE_PIECE':
-      return handleMovePiece(state, action);
+      let newState = handleMovePiece(state, action);
+      return checkWinner(newState);
     default:
       return state;
   }
@@ -58,6 +61,8 @@ const getNextPlayer = (players, currentPlayer) => {
 const handleMovePiece = (state, { color, currentStepValue }) => {
   const { isPlayingTurn, pieces, diceValue, currentPlayer } = state;
   let turnPlayed = false;
+  let enemyPiecePosition = null;
+  let enemyPieceColor = null;
   if (currentPlayer === color && isPlayingTurn) {
     if (isPlayableDiceValue(pieces[currentPlayer], diceValue)) {
       const newPieceValues = pieces[color].map(stepValue => {
@@ -65,14 +70,36 @@ const handleMovePiece = (state, { color, currentStepValue }) => {
           return stepValue;
         }
         if (
+          // piece in player home
           diceValue === 6 &&
           currentStepValue === 0 &&
           currentStepValue === stepValue
         ) {
           turnPlayed = true;
           return 1;
-        } else if (currentStepValue > 0 && currentStepValue === stepValue) {
+        } else if (currentStepValue >= 52 && currentStepValue === stepValue) {
+          // piece in victory path
           turnPlayed = true;
+          return stepValue + diceValue;
+        } else if (currentStepValue > 0 && currentStepValue === stepValue) {
+          // piece in global path
+          turnPlayed = true;
+          let targetGlobalPosition = getGlobalPosition(
+            stepValue + diceValue,
+            color
+          );
+          console.log('###############' + targetGlobalPosition);
+          [enemyPieceColor, enemyPiecePosition] = getKillableEnemy(
+            targetGlobalPosition,
+            color,
+            pieces
+          );
+          console.log(
+            '############### killable enemy' +
+              enemyPieceColor +
+              enemyPiecePosition
+          );
+
           return stepValue + diceValue;
         }
         return stepValue;
@@ -80,15 +107,17 @@ const handleMovePiece = (state, { color, currentStepValue }) => {
       if (turnPlayed) {
         return {
           ...state,
-          pieces: {
-            ...state.pieces,
-            [currentPlayer]: newPieceValues
-          },
+          pieces: getNewPieceData(
+            state,
+            newPieceValues,
+            enemyPieceColor,
+            enemyPiecePosition
+          ),
           isPlayingTurn: false,
           currentPlayer:
             diceValue === 6
               ? currentPlayer
-              : getNextPlayer(state.players, state.currentPlayer),
+              : getNextPlayer(state.players, state.currentPlayer, pieces),
           diceValue: null
         };
       }
@@ -97,6 +126,82 @@ const handleMovePiece = (state, { color, currentStepValue }) => {
   return state;
 };
 
-// six gets another turn if it's playable
+const getKillableEnemy = (targetGlobalPosition, currentPlayer, pieces) => {
+  if (isNonViolenceGlobalPosition(targetGlobalPosition)) {
+    return [null, null];
+  }
+  let killablePieceColor = null;
+  let killablePiecePosition = null;
+  Object.keys(pieces).map(color => {
+    if (color !== currentPlayer) {
+      pieces[color].map(piecePosition => {
+        console.log(
+          '$$$$$$$$' +
+            targetGlobalPosition +
+            '@@@@' +
+            getGlobalPosition(piecePosition, color)
+        );
+        if (targetGlobalPosition === getGlobalPosition(piecePosition, color)) {
+          killablePieceColor = color;
+          killablePiecePosition = piecePosition;
+        }
+      });
+    }
+  });
 
-//
+  return [killablePieceColor, killablePiecePosition];
+};
+
+const getNewPieceData = (
+  state,
+  currentPlayerNewPieceData,
+  killablePieceColor,
+  killablePiecePosition
+) => {
+  console.table(killablePieceColor, killablePiecePosition);
+  let newOtherColorData = {};
+  if (killablePieceColor) {
+    Object.keys(state.pieces).map(color => {
+      if (color === killablePieceColor) {
+        newOtherColorData[color] = state.pieces[color].map(piecePosition => {
+          return piecePosition === killablePiecePosition ? 0 : piecePosition;
+        });
+      } else {
+        newOtherColorData[color] = state.pieces[color];
+      }
+    });
+    console.log(Object.keys(state.pieces));
+    console.log({
+      ...newOtherColorData,
+      [state.currentPlayer]: currentPlayerNewPieceData
+    });
+    return {
+      ...newOtherColorData,
+      [state.currentPlayer]: currentPlayerNewPieceData
+    };
+  }
+  return {
+    ...state.pieces,
+    [state.currentPlayer]: currentPlayerNewPieceData
+  };
+};
+
+const checkWinner = state => {
+  let winner = '';
+  Object.keys(state.pieces).map(color => {
+    let isVictorious = true;
+    state.pieces[color].map(piecePosition => {
+      if (piecePosition !== 57) {
+        isVictorious = false;
+      }
+    });
+    if (isVictorious) {
+      winner = color;
+    }
+  });
+
+  return {
+    ...state,
+    winner
+  };
+};
