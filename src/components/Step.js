@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import Piece from './Piece';
@@ -57,19 +58,55 @@ const generateGroupedPieces = pieces => {
   ));
 };
 
+const isClickableStep = pieces => {
+  let isClickable = false;
+  pieces.forEach(stepPieceData => {
+    if (stepPieceData.isClickable) {
+      isClickable = true;
+    }
+  });
+  return isClickable;
+};
+
+const pieceMoveActionCreator = (stepPieces, dispatch) => {
+  let clickablePiecePosition = null;
+  let clickablePieceColor = null;
+  stepPieces.map(pieceData => {
+    if (pieceData.isClickable) {
+      clickablePiecePosition = pieceData.piecePosition;
+      clickablePieceColor = pieceData.color;
+    }
+  });
+  return () => {
+    dispatch({
+      type: 'MOVE_PIECE',
+      color: clickablePieceColor,
+      currentStepValue: clickablePiecePosition
+    });
+  };
+};
+
+const mapStateToProps = ({ diceValue, currentPlayer }) => {
+  return {
+    diceValue,
+    currentPlayer
+  };
+};
+
 const Step = props => {
-  const {
-    color = 'white',
-    showStar = false,
-    pieces = [],
-    isClickable = false
-  } = props;
+  const { color = 'white', showStar = false, pieces = [], dispatch } = props;
   const pieceCount = getPieceCount(pieces);
+  const isClickable = isClickableStep(pieces);
 
   if (pieceCount < 2) {
     const pieceItems = generatePieces(pieces);
     return (
-      <StepTile color={color} showStar={showStar} highlight={isClickable}>
+      <StepTile
+        color={color}
+        showStar={showStar}
+        highlight={isClickable}
+        onClick={isClickable ? pieceMoveActionCreator(pieces, dispatch) : null}
+      >
         {pieceItems}
       </StepTile>
     );
@@ -80,6 +117,7 @@ const Step = props => {
         color={color}
         showStar={showStar}
         highlight={isClickable}
+        onClick={isClickable ? pieceMoveActionCreator(pieces, dispatch) : null}
       >
         {pieceItems}
       </MultiPieceStepTile>
@@ -91,6 +129,7 @@ const Step = props => {
         color={color}
         showStar={showStar}
         highlight={isClickable}
+        onClick={isClickable ? pieceMoveActionCreator(pieces, dispatch) : null}
       >
         {pieceItems}
       </MultiPieceStepTile>
@@ -98,4 +137,4 @@ const Step = props => {
   }
 };
 
-export default Step;
+export default connect(mapStateToProps)(Step);
