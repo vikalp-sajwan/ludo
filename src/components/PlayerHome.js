@@ -19,7 +19,20 @@ const Wrapper = styled.div`
   background: ${({ color }) => theme.base[color]};
   ${({ highlight }) =>
     highlight &&
-    `box-shadow: 0px 0px 5px 5px #0ff; z-index: 5; cursor: pointer;`}
+    `
+      animation: glow 0.8s ease-out infinite;
+      z-index: 5;
+      cursor: pointer;
+    `}
+
+  @keyframes glow {
+    0% {
+      box-shadow: 0px 0px 0px 0px #055;
+    }
+    100% {
+      box-shadow: 0px 0px 5px 5px #0ee;
+    }
+  }
 `;
 
 const PlayerHomeTile = styled(StepTile)`
