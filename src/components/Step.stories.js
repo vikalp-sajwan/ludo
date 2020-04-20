@@ -10,6 +10,10 @@ const pieces = [
   { color: 'yellow', times: 4 }
 ];
 
+const clickablePiece = [
+  { color: 'red', times: 1, isClickable: true },
+];
+
 storiesOf('Step', module)
   .add('default', () => <Step />)
   .add('colored', () => <Step color="red" />)
@@ -28,5 +32,5 @@ storiesOf('Step', module)
     <Step showStar={true} pieces={pieces.slice(0, 2)} />
   ))
   .add('highlighted and clickable', () => (
-    <Step pieces={[pieces[0]]} isClickable={true} />
+    <Step pieces={ clickablePiece } />
   ));

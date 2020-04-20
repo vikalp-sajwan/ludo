@@ -18,7 +18,20 @@ export const StepTile = styled.div`
   background-color: ${props => theme.base[props.color]};
   ${({ highlight }) =>
     highlight &&
-    `box-shadow: 0px 0px 5px 5px #0ff; z-index: 5; cursor: pointer;`}
+    `
+      animation: glow-step 0.8s ease-out infinite;
+      z-index: 5;
+      cursor: pointer;
+    `}
+
+  @keyframes glow-step {
+    0% {
+      box-shadow: 0px 0px 0px 0px #055;
+    }
+    100% {
+      box-shadow: 0px 0px 5px 5px #0ee;
+    }
+  }
   ${({ showStar }) => showStar && `background: url(${starImg}) no-repeat;`}
 `;
 
@@ -34,7 +47,20 @@ const MultiPieceStepTile = styled.div`
   background-color: ${props => theme.base[props.color]};
   ${({ highlight }) =>
     highlight &&
-    `box-shadow: 0px 0px 5px 5px #0ff; z-index: 5; cursor:pointer;`}
+    `
+      animation: glow-step 0.8s ease-out infinite;
+      z-index: 5;
+      cursor: pointer;
+    `}
+
+  @keyframes glow-step {
+    0% {
+      box-shadow: 0px 0px 0px 0px #055;
+    }
+    100% {
+      box-shadow: 0px 0px 5px 5px #0ee;
+    }
+  }
   ${({ showStar }) => showStar && `background: url(${starImg}) no-repeat;`}
 `;
 
