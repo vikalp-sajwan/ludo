@@ -88,17 +88,17 @@ const handleMovePiece = (state, { color, currentStepValue }) => {
             stepValue + diceValue,
             color
           );
-          console.log('###############' + targetGlobalPosition);
+          // console.log('###############' + targetGlobalPosition);
           [enemyPieceColor, enemyPiecePosition] = getKillableEnemy(
             targetGlobalPosition,
             color,
             pieces
           );
-          console.log(
-            '############### killable enemy' +
-              enemyPieceColor +
-              enemyPiecePosition
-          );
+          // console.log(
+          //   '############### killable enemy' +
+          //     enemyPieceColor +
+          //     enemyPiecePosition
+          // );
 
           return stepValue + diceValue;
         }
@@ -135,12 +135,12 @@ const getKillableEnemy = (targetGlobalPosition, currentPlayer, pieces) => {
   Object.keys(pieces).map(color => {
     if (color !== currentPlayer) {
       pieces[color].map(piecePosition => {
-        console.log(
-          '$$$$$$$$' +
-            targetGlobalPosition +
-            '@@@@' +
-            getGlobalPosition(piecePosition, color)
-        );
+        // console.log(
+        //   '$$$$$$$$' +
+        //     targetGlobalPosition +
+        //     '@@@@' +
+        //     getGlobalPosition(piecePosition, color)
+        // );
         if (targetGlobalPosition === getGlobalPosition(piecePosition, color)) {
           killablePieceColor = color;
           killablePiecePosition = piecePosition;
@@ -158,7 +158,7 @@ const getNewPieceData = (
   killablePieceColor,
   killablePiecePosition
 ) => {
-  console.table(killablePieceColor, killablePiecePosition);
+  // console.table(killablePieceColor, killablePiecePosition);
   let newOtherColorData = {};
   if (killablePieceColor) {
     Object.keys(state.pieces).map(color => {
