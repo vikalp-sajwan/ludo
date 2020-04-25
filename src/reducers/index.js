@@ -88,18 +88,11 @@ const handleMovePiece = (state, { color, currentStepValue }) => {
             stepValue + diceValue,
             color
           );
-          // console.log('###############' + targetGlobalPosition);
           [enemyPieceColor, enemyPiecePosition] = getKillableEnemy(
             targetGlobalPosition,
             color,
             pieces
           );
-          // console.log(
-          //   '############### killable enemy' +
-          //     enemyPieceColor +
-          //     enemyPiecePosition
-          // );
-
           return stepValue + diceValue;
         }
         return stepValue;
@@ -135,18 +128,14 @@ const getKillableEnemy = (targetGlobalPosition, currentPlayer, pieces) => {
   Object.keys(pieces).map(color => {
     if (color !== currentPlayer) {
       pieces[color].map(piecePosition => {
-        // console.log(
-        //   '$$$$$$$$' +
-        //     targetGlobalPosition +
-        //     '@@@@' +
-        //     getGlobalPosition(piecePosition, color)
-        // );
         if (targetGlobalPosition === getGlobalPosition(piecePosition, color)) {
           killablePieceColor = color;
           killablePiecePosition = piecePosition;
         }
+        return null;
       });
     }
+    return null;
   });
 
   return [killablePieceColor, killablePiecePosition];
@@ -158,7 +147,6 @@ const getNewPieceData = (
   killablePieceColor,
   killablePiecePosition
 ) => {
-  // console.table(killablePieceColor, killablePiecePosition);
   let newOtherColorData = {};
   if (killablePieceColor) {
     Object.keys(state.pieces).map(color => {
@@ -169,6 +157,7 @@ const getNewPieceData = (
       } else {
         newOtherColorData[color] = state.pieces[color];
       }
+      return null;
     });
     console.log(Object.keys(state.pieces));
     console.log({
@@ -194,10 +183,12 @@ const checkWinner = state => {
       if (piecePosition !== 57) {
         isVictorious = false;
       }
+      return null;
     });
     if (isVictorious) {
       winner = color;
     }
+    return null;
   });
 
   return {
