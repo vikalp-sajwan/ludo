@@ -102,6 +102,7 @@ const pieceMoveActionCreator = (stepPieces, dispatch) => {
       clickablePiecePosition = pieceData.piecePosition;
       clickablePieceColor = pieceData.color;
     }
+    return null;
   });
   return () => {
     dispatch({
