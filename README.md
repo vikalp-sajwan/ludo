@@ -6,7 +6,7 @@ Bootstapped using Create React App.
 
 ## See it in action: https://ludo-vikalp.netlify.app/
 
-## Storybook for components:
+## Storybook for components: https://vikalp-sajwan.github.io/ludo
 
 ## Main Concepts Used:
 * ReactJS
